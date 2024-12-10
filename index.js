@@ -8,7 +8,7 @@ app.use(cookieParser());
 const connection = require('./db/connection');
 const register=require('./Controller/register');
 const login=require('./Controller/login');
-const getusers=require('./Controller/users');
+const authChecking=require('./Controller/auth');
 
 
 //middlewares
@@ -27,7 +27,7 @@ connection();
 //Controller
 app.use('/api',register);
 app.use('/api',login);
-app.use('/api',getusers);
+app.use('/api',authChecking);
 
 
 app.listen(3001,()=>{

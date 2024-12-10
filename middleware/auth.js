@@ -22,11 +22,11 @@ const middleware = async (req, res, next) => {
       const fetchedRefreshToken = await Token.findOne({
         refreshtoken: req.cookies.refreshToken,
       });
-      console.log(
-        "Refresh token found:",
-        fetchedRefreshToken,
-        req.cookies.refreshToken
-      );
+    //   console.log(
+    //     "Refresh token found:",
+    //     fetchedRefreshToken,
+    //     req.cookies.refreshToken
+    //   );
 
       if (fetchedRefreshToken === null) {
         console.log("Invalid or missing refresh token");
@@ -34,8 +34,6 @@ const middleware = async (req, res, next) => {
           .status(403)
           .json({ message: "Invalid or missing refresh token" });
       }
-
-      //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTdmMmNlYjIxZTIzZTMwMTI0NjJiYSIsImlhdCI6MTczMzgyOTQzMSwiZXhwIjoxNzMzODI5NDYxfQ.DT2xCAsS5Jk_H9ASBqtvw1lJCwjvoDKgekB1jeZ5Qs0
 
       // Verify the refresh token
       try {
@@ -70,8 +68,8 @@ const middleware = async (req, res, next) => {
 
           // Set new cookies
           res.setHeader("Set-Cookie", [
-            `accessToken=${accessToken}; Path=/; HttpOnly; Secure=false; SameSite=None`,
-            `refreshToken=${refreshToken}; Path=/; HttpOnly; Secure=false; SameSite=None`,
+            `accessToken=${accessToken}; Path=/; Secure=false; SameSite=None`,
+            `refreshToken=${refreshToken}; Path=/; Secure=false; SameSite=None`,
           ]);
           console.log("New tokens set and user authenticated");
         }

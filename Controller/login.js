@@ -44,8 +44,8 @@ router.post("/login", async (req, res) => {
         const refreshTokenResponse=await newToken.save();
 
         res.setHeader('Set-Cookie', [
-            `accessToken=${accesstoken}; Path=/; HttpOnly; Secure=false; SameSite=None`,
-            `refreshToken=${refreshtoken}; Path=/; HttpOnly; Secure=false; SameSite=None`
+            `accessToken=${accesstoken}; Path=/; Secure=false; SameSite=None`,
+            `refreshToken=${refreshtoken}; Path=/; Secure=false; SameSite=None`
         ]);
 
         res.json({message:"login successful",refreshTokenResponse})
