@@ -8,7 +8,9 @@ app.use(cookieParser());
 const connection = require('./db/connection');
 const register=require('./Controller/register');
 const login=require('./Controller/login');
+const googleLogin=require('./Controller/googleLogin')
 const authChecking=require('./Controller/auth');
+const logout=require('./Controller/logout');
 
 
 //middlewares
@@ -28,7 +30,8 @@ connection();
 app.use('/api',register);
 app.use('/api',login);
 app.use('/api',authChecking);
-
+app.use('/api',logout);
+app.use('/api',googleLogin);
 
 app.listen(3001,()=>{
    console.log('app is listening on 3001');

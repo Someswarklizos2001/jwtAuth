@@ -48,12 +48,12 @@ const middleware = async (req, res, next) => {
           const accessToken = jwt.sign(
             { id: verifiedRefreshToken.id },
             process.env.ACCESS_TOKEN_SECRET_KEY,
-            { expiresIn: "20s" }
+            { expiresIn: "15m" }
           );
           const refreshToken = jwt.sign(
             { id: verifiedRefreshToken.id },
             process.env.REFRESS_TOKEN_SECRET_KEY,
-            { expiresIn: "15m" }
+            { expiresIn: "1d" }
           );
 
           // Update the refresh token in the database
@@ -77,7 +77,9 @@ const middleware = async (req, res, next) => {
       } catch (e) {
         console.log("Error verifying refresh token", e);
         console.log("deleting the refresh token");
-        await Token.deleteOne({ refreshtoken: req.cookies.refreshToken });
+        const userId=jwt.verify(req.cookies.refreshToken,process.env.REFRESS_TOKEN_SECRET_KEY);
+        const logout=await Token.deleteMany({user:userId.id});
+        console.log(logout)
         return res.status(403).json({ message: "Invalid refresh token" });
       }
     } else {
