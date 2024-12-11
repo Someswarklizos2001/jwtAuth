@@ -16,7 +16,7 @@ const logout=require('./Controller/logout');
 //middlewares
 app.use(express.json()); 
 app.use(cors({
-    origin:"https://jwt-frontend-one.vercel.app",
+    origin:"https://jwt-frontend-psi.vercel.app",
     methods:['GET','POST','PUT','PATCH','DELETE'],
     credentials:true,
     allowedHeaders: ['x-access-token', 'x-refresh-token', 'Content-Type']
