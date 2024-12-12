@@ -22,12 +22,7 @@ const middleware = async (req, res, next) => {
       const fetchedRefreshToken = await Token.findOne({
         refreshtoken: req.cookies.refreshToken,
       });
-    //   console.log(
-    //     "Refresh token found:",
-    //     fetchedRefreshToken,
-    //     req.cookies.refreshToken
-    //   );
-
+ 
       if (fetchedRefreshToken === null) {
         console.log("Invalid or missing refresh token");
         return res

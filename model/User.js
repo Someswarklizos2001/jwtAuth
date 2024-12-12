@@ -18,6 +18,9 @@ const user=mongoose.Schema({
     confirmpassword:{
         type:Array,
         require:true
+    },
+    cartId:{
+        type:Array
     }
 })
 
