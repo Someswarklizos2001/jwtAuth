@@ -36,7 +36,7 @@ router.post("/cartdecrease", async (req, res) => {
           { $pull: { cartId: String(req.body.id) } } // Remove the item ID from cartId array
         );
   
-        return res.status(200).json({ message: "Item removed from cart and cartId updated" });
+        return res.status(200).json({ message: "Item removed from cart and cartId updated",cartItem });
       } else {
         // Decrease the count of the item in the cart
         await Cart.updateOne(
@@ -48,7 +48,7 @@ router.post("/cartdecrease", async (req, res) => {
           }
         );
   
-        return res.status(200).json({ message: "Successfully updated" });
+        return res.status(200).json({ message: "Successfully updated",cartItem });
       }
     } catch (e) {
       console.error("Error in /cartdecrease:", e.message);

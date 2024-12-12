@@ -32,7 +32,7 @@ router.post("/cartincrease", async (req, res) => {
         }
       );
   
-      return res.status(200).json({ message: "Successfully updated" });
+      return res.status(200).json({ message: "Successfully updated",cartItem });
     } catch (e) {
       console.error("Error in /cartincrease:", e.message);
       return res.status(400).json({ error: e.message });
