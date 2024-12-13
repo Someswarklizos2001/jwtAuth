@@ -29,7 +29,7 @@ router.get("/fetchProducts", async (req, res) => {
       products,
       currentPage: page,
       totalPages: Math.ceil(totalProducts / limit),
-    });
+    }); 
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).json({ error: "Failed to fetch products" });
