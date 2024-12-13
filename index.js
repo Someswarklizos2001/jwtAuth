@@ -16,6 +16,9 @@ const getCartId=require('./Controller/cart/getCartId');
 const getUserCart=require("./Controller/cart/getUserCart")
 const cartIncrease=require("./Controller/cart/cartincrease");
 const cartDecrease=require("./Controller/cart/cartdecrease");
+const initializeProducts=require("./Controller/products/initializeProducts");
+const fetchProducts=require("./Controller/products/fetchProducts");
+const searchproducts=require("./Controller/products/searchproducts");
 
 //middlewares
 app.use(express.json()); 
@@ -41,6 +44,9 @@ app.use('/api',getCartId);
 app.use("/api",getUserCart);
 app.use("/api",cartIncrease);
 app.use("/api",cartDecrease);
+app.use("/api",initializeProducts);
+app.use("/api",fetchProducts);
+app.use("/api",searchproducts);
 
 app.listen(3001,()=>{
    console.log('app is listening on 3001');
