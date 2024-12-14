@@ -3,10 +3,11 @@ const Product = require('../../model/Product');
 const dotenv=require('dotenv');
 const axios=require('axios');
 const router=express.Router();
+const auth=require("../../middleware/auth");
 
 dotenv.config();
 
-router.get('/intializeProducts', async (req, res) => {
+router.get('/intializeProducts',auth, async (req, res) => {
     try {
       const { data } = await axios.get('https://fakestoreapi.com/products');
   

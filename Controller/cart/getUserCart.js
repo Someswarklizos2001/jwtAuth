@@ -3,10 +3,11 @@ const jwt=require('jsonwebtoken');
 const dotenv=require('dotenv');
 const Cart = require('../../model/Cart');
 const router=express.Router();
+const auth=require("../../middleware/auth");
 
 dotenv.config();
 
-router.get('/getUserCart',async(req,res)=>{
+router.get('/getUserCart',auth,async(req,res)=>{
 
     const decode=jwt.verify(req.cookies.refreshToken,process.env.REFRESS_TOKEN_SECRET_KEY);
 

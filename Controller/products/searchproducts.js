@@ -3,10 +3,11 @@ const Product = require('../../model/Product');
 const dotenv=require('dotenv');
 const axios=require('axios');
 const router=express.Router();
+const auth=require("../../middleware/auth");
 
 dotenv.config();
 
-router.post('/searchproducts', async (req, res) => {
+router.post('/searchproducts',auth, async (req, res) => {
     try {
         const {input}=req.body;
     

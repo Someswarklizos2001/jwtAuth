@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../../model/Product"); 
+const auth=require("../../middleware/auth");
 
-router.get("/fetchProducts", async (req, res) => {
+router.get("/fetchProducts",auth, async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 8;  
     const page = parseInt(req.query.page) || 1;

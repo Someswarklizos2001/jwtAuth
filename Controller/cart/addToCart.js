@@ -4,10 +4,11 @@ const jwt=require('jsonwebtoken');
 const dotenv=require('dotenv');
 const User = require('../../model/User');
 const router=express.Router();
+const auth=require("../../middleware/auth");
 
 dotenv.config();
 
-router.post('/addtocart',async(req,res)=>{
+router.post('/addtocart',auth,async(req,res)=>{
 
     const {id,count,title,image,category,actualPrice,price,description}=req.body;
     const decode=jwt.verify(req.cookies.refreshToken,process.env.REFRESS_TOKEN_SECRET_KEY);
