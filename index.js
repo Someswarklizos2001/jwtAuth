@@ -20,11 +20,12 @@ const initializeProducts=require("./Controller/products/initializeProducts");
 const fetchProducts=require("./Controller/products/fetchProducts");
 const searchproducts=require("./Controller/products/searchproducts");
 const removecartproduct=require("./Controller/cart/removecartproduct");
+const getsimilarCategory=require("./Controller/products/getsimilarproducts");
 
 //middlewares
 app.use(express.json()); 
 app.use(cors({
-    origin:"https://jwt-frontend-psi.vercel.app",
+    origin:"http://localhost:3000",
     methods:['GET','POST','PUT','PATCH','DELETE'],
     credentials:true,
     allowedHeaders: ['x-access-token', 'x-refresh-token', 'Content-Type']
@@ -49,6 +50,7 @@ app.use("/api",initializeProducts);
 app.use("/api",fetchProducts);
 app.use("/api",searchproducts);
 app.use("/api",removecartproduct);
+app.use("/api",getsimilarCategory);
 
 app.listen(3001,()=>{
    console.log('app is listening on 3001');
