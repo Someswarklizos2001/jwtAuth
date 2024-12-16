@@ -11,9 +11,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/create-checkout-session", auth, async (req, res) => {
 
-
-  console.log(req.body.price);
-
   const title=req?.body?.title ;
   const description=req?.body?.description ;
   const image=req?.body?.image;
