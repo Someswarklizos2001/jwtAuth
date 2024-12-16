@@ -28,7 +28,6 @@ router.get('/intializeProducts',auth, async (req, res) => {
           await product.save();
         } catch (error) {
           if (error.code === 11000) {
-            // Duplicate key error
             console.log(`Duplicate product skipped: ${item.id}`);
           } else {
             console.error(`Error saving product: ${item.id}`, error);

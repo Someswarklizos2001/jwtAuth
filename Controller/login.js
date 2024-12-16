@@ -26,9 +26,9 @@ router.post("/login", async (req, res) => {
       user.password[0]
     );
 
-    console.log(password,user.password[1],user.password[0]);
+    // console.log(password,user.password[1],user.password[0]);
     
-    console.log(match_password);
+    // console.log(match_password);
 
     if (match_password) {
 

@@ -13,7 +13,7 @@ const middleware = async (req, res, next) => {
       req.cookies.accessToken,
       process.env.ACCESS_TOKEN_SECRET_KEY
     );
-    console.log("Access token verified:", verifiedAccessToken);
+    // console.log("Access token verified:", verifiedAccessToken);
     next();
   } catch (err) {
     console.log("Access token verification failed:", err.name);
@@ -36,7 +36,7 @@ const middleware = async (req, res, next) => {
           fetchedRefreshToken.refreshtoken,
           process.env.REFRESS_TOKEN_SECRET_KEY
         );
-        console.log("Refresh token verified:", verifiedRefreshToken);
+        // console.log("Refresh token verified:", verifiedRefreshToken);
 
         // Generate new access and refresh tokens
         if (verifiedRefreshToken.id !== null) {
@@ -66,7 +66,7 @@ const middleware = async (req, res, next) => {
             `accessToken=${accessToken}; Path=/; Secure=false; SameSite=None`,
             `refreshToken=${refreshToken}; Path=/; Secure=false; SameSite=None`,
           ]);
-          console.log("New tokens set and user authenticated");
+          // console.log("New tokens set and user authenticated");
         }
         next();
       } catch (e) {
@@ -74,7 +74,7 @@ const middleware = async (req, res, next) => {
         console.log("deleting the refresh token");
         const userId=jwt.verify(req.cookies.refreshToken,process.env.REFRESS_TOKEN_SECRET_KEY);
         const logout=await Token.deleteMany({user:userId.id});
-        console.log(logout)
+        // console.log(logout)
         return res.status(403).json({ message: "Invalid refresh token" });
       }
     } else {

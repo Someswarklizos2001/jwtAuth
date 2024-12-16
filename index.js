@@ -21,6 +21,7 @@ const fetchProducts=require("./Controller/products/fetchProducts");
 const searchproducts=require("./Controller/products/searchproducts");
 const removecartproduct=require("./Controller/cart/removecartproduct");
 const getsimilarCategory=require("./Controller/products/getsimilarproducts");
+const checkout=require("./Controller/checkout/payment")
 
 //middlewares
 app.use(express.json()); 
@@ -51,6 +52,7 @@ app.use("/api",fetchProducts);
 app.use("/api",searchproducts);
 app.use("/api",removecartproduct);
 app.use("/api",getsimilarCategory);
+app.use("/api",checkout)
 
 app.listen(3001,()=>{
    console.log('app is listening on 3001');
