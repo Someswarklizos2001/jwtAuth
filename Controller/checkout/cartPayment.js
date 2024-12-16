@@ -9,14 +9,9 @@ dotenv.config();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-router.post("/create-checkout-session", auth, async (req, res) => {
+router.post("/create-cart-checkout-session", auth, async (req, res) => {
 
 
-  console.log(req.body.price);
-
-  const title=req?.body?.title ;
-  const description=req?.body?.description ;
-  const image=req?.body?.image;
   const price=req?.body?.price;
 
     try {
@@ -27,10 +22,7 @@ router.post("/create-checkout-session", auth, async (req, res) => {
             price_data: {
               currency: "usd",
               product_data: { 
-                  name: title,
-                  images:[image],
-                  description:description
-                  
+                  name:"Cart Items"
                },
               unit_amount: price*100,
               
@@ -47,7 +39,7 @@ router.post("/create-checkout-session", auth, async (req, res) => {
   
       res.json({ id: session.id });
     } catch (error) {
-      console.error("Error creating session:", error);
+      console.error("Error creating session:", error.message);
       res.status(500).send("Internal Server Error");
     }
   });

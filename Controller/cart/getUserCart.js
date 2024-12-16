@@ -13,10 +13,7 @@ router.get('/getUserCart',auth,async(req,res)=>{
 
     try{    
         const cart_items=await Cart.find({user:decode.id});
-        console.log(cart_items);
         return res.status(200).json({message:"successfully fetched",cart_items});
-
-        
     }catch(e){
         return res.status(400).json(e.message);
     }

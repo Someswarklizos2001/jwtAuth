@@ -5,7 +5,6 @@ const auth=require('../../middleware/auth');
 
 router.get("/products/category",auth,async(req,res)=>{
 
-    console.log(req.query.category,req.query.id);
     try{
     const products=await Product.find({
         category:req.query.category,
