@@ -1,11 +1,13 @@
 const express=require("express");
 const router=express.Router();
 const auth=require("../../middleware/auth");
-const stripe = require("stripe")("sk_test_51QWXfvLb3aUo71xgGkOvNCGWeIC1y5tdXicxE25xn6WFBRFW5RjXywjaFrBFbXmm8p5zQ1UB63SZxNV4Bkc4GO1K00XtLRWBfm");
+
 const dotenv=require('dotenv');
 
 
 dotenv.config();
+
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/create-checkout-session", auth, async (req, res) => {
 
@@ -34,7 +36,7 @@ router.post("/create-checkout-session", auth, async (req, res) => {
         mode: "payment",
         success_url: `${process.env.REACT_BASEURL}/success`,
         cancel_url: `${process.env.REACT_BASEURL}/cancel`,
-        
+
       });
   
       res.json({ id: session.id });

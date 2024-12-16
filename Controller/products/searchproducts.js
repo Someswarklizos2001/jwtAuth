@@ -1,7 +1,6 @@
 const express=require('express');
 const Product = require('../../model/Product');
 const dotenv=require('dotenv');
-const axios=require('axios');
 const router=express.Router();
 const auth=require("../../middleware/auth");
 
