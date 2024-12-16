@@ -16,8 +16,8 @@ router.post("/create-checkout-session", auth, async (req, res) => {
   const image=req?.body?.image;
   const price=req?.body?.price;
 
-    try {
-      const session = await stripe.checkout.sessions.create({
+    try { 
+      const session = await stripe.checkout.sessions.create({ 
         payment_method_types: ["card"],
         line_items: [
           {
