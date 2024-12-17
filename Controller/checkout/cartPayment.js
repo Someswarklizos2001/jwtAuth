@@ -11,26 +11,28 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/create-cart-checkout-session", auth, async (req, res) => {
 
-
-  const price=req?.body?.price;
+   const {cart,price}=req.body;
+ 
+   const line_items=cart.map(data=>({
+    price_data: {
+      currency: "usd",
+      product_data: { 
+          name:data.title,
+          description:data.description,
+          images:[data.image]
+       },
+      unit_amount: price*100,
+      
+    },
+    quantity: 1,
+    
+   })
+   )
 
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        line_items: [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: { 
-                  name:"Cart Items"
-               },
-              unit_amount: price*100,
-              
-            },
-            quantity: 1,
-            
-          },
-        ],
+        line_items:line_items,
         mode: "payment",
         success_url: `${process.env.REACT_BASEURL}/success`,
         cancel_url: `${process.env.REACT_BASEURL}/cancel`,
