@@ -1,6 +1,7 @@
 const express=require("express");
 const router=express.Router();
 const auth=require("../../middleware/auth");
+const jwt=require("jsonwebtoken")
 
 const dotenv=require('dotenv');
 
@@ -15,6 +16,8 @@ router.post("/create-checkout-session", auth, async (req, res) => {
   const description=req?.body?.description ;
   const image=req?.body?.image;
   const price=req?.body?.price;
+
+  const decode=jwt.verify(req.cookies.refreshToken,process.env.REFRESS_TOKEN_SECRET_KEY);
 
     try { 
       const session = await stripe.checkout.sessions.create({ 
@@ -39,7 +42,7 @@ router.post("/create-checkout-session", auth, async (req, res) => {
         mode: "payment",
         success_url: `${process.env.REACT_BASEURL}/success`,
         cancel_url: `${process.env.REACT_BASEURL}/cancel`,
-
+        customer_email:decode.email
       });
   
       res.json({ id: session.id });

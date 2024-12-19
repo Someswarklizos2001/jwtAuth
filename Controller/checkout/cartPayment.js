@@ -1,6 +1,7 @@
 const express=require("express");
 const router=express.Router();
 const auth=require("../../middleware/auth");
+const jwt=require("jsonwebtoken");
 
 const dotenv=require('dotenv');
 
@@ -11,7 +12,10 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/create-cart-checkout-session", auth, async (req, res) => {
 
-   const {cart,price}=req.body;
+   const {cart}=req.body;
+   const decode=jwt.verify(req.cookies.refreshToken,process.env.REFRESS_TOKEN_SECRET_KEY);
+
+   console.log('segseg');
  
    const line_items=cart.map(data=>({
     price_data: {
@@ -21,8 +25,7 @@ router.post("/create-cart-checkout-session", auth, async (req, res) => {
           description:data.description,
           images:[data.image]
        },
-      unit_amount: price*100,
-      
+       unit_amount: data.price*100,
     },
     quantity: 1,
     
@@ -36,7 +39,8 @@ router.post("/create-cart-checkout-session", auth, async (req, res) => {
         mode: "payment",
         success_url: `${process.env.REACT_BASEURL}/success`,
         cancel_url: `${process.env.REACT_BASEURL}/cancel`,
-
+        customer_email:decode.email,
+     
       });
   
       res.json({ id: session.id });

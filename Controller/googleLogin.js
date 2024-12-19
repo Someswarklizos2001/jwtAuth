@@ -18,8 +18,8 @@ router.post("/google-login", async (req, res) => {
     res.status(404).json({ message: "user not found" });
   } else {
 
-        const accesstoken=jwt.sign({id:user._id},process.env.ACCESS_TOKEN_SECRET_KEY,{expiresIn:'15m'});
-        const refreshtoken=jwt.sign({id:user._id},process.env.REFRESS_TOKEN_SECRET_KEY,{expiresIn:'1d'});
+        const accesstoken=jwt.sign({id:user._id,email:email,name:user.name},process.env.ACCESS_TOKEN_SECRET_KEY,{expiresIn:'15m'});
+        const refreshtoken=jwt.sign({id:user._id,email:email,name:user.name},process.env.REFRESS_TOKEN_SECRET_KEY,{expiresIn:'1d'});
 
         const newToken=new Token({
             refreshtoken:refreshtoken,

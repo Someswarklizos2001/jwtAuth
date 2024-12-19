@@ -41,12 +41,12 @@ const middleware = async (req, res, next) => {
         // Generate new access and refresh tokens
         if (verifiedRefreshToken.id !== null) {
           const accessToken = jwt.sign(
-            { id: verifiedRefreshToken.id },
+            { id: verifiedRefreshToken.id,email:verifiedRefreshToken.email,name:verifiedRefreshToken.name },
             process.env.ACCESS_TOKEN_SECRET_KEY,
             { expiresIn: "15m" }
           );
           const refreshToken = jwt.sign(
-            { id: verifiedRefreshToken.id },
+            { id: verifiedRefreshToken.id,email:verifiedRefreshToken.email,name:verifiedRefreshToken.name },
             process.env.REFRESS_TOKEN_SECRET_KEY,
             { expiresIn: "1d" }
           );
