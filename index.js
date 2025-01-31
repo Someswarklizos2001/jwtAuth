@@ -27,7 +27,7 @@ const cartcheckout=require("./Controller/checkout/cartPayment")
 //middlewares
 app.use(express.json()); 
 app.use(cors({
-    origin:"http://localhost:3000",
+    origin:"https://jwt-frontend-psi.vercel.app",
     methods:['GET','POST','PUT','PATCH','DELETE'],
     credentials:true,
     allowedHeaders: ['x-access-token', 'x-refresh-token', 'Content-Type']
